@@ -1,8 +1,19 @@
-/** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
 module.exports = {
-  content: ["./*.html"], // Isso indica ao Tailwind para ler os arquivos HTML na raiz do projeto
+  content: ["./*.html", "./src/**/*.{html,js}", "./public/*.html"],
   theme: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      const myUtilities = {
+        ".bg-aqua": { background: "aqua" },
+        ".rotate-150deg": {
+          transform: "rotateX(150deg)",
+        },
+      };
+      addUtilities(myUtilities);
+    }),
+  ],
+
+};

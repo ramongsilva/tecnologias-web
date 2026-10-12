@@ -1,1 +1,102 @@
-<!Doctype HTML>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Tailwind v4</title>
+    <!-- Vinculando o CSS gerado pelo build -->
+    <link href="./dist/output.css" rel="stylesheet">
+</head>
+<body class="bg-slate-100 p-1">
+
+<div class="flex flex-col min-h-screen bg-gray-100 font-sans">
+  
+  <!-- 1. CABEÇALHO (1 Linha) -->
+  <header class="bg-blue-600 text-white p-4 shadow-md">
+    <div class="container mx-auto flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <h1 class="text-xl font-bold">Meu Logotipo</h1>
+      <nav class="flex flex-wrap gap-2">
+        <a href="#" class="rounded px-3 py-2 hover:bg-blue-700 hover:underline">Início</a>
+        <a href="#" class="rounded px-3 py-2 hover:bg-blue-700 hover:underline">Sobre</a>
+        <a href="#" class="rounded px-3 py-2 hover:bg-blue-700 hover:underline">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PARTE INFERIOR (Dividida em 2 colunas) -->
+  <div class="flex flex-1 flex-col md:flex-row">
+    
+    <!-- Coluna 1: Menu Vertical -->
+    <aside class="relative z-20 w-full bg-white border-r border-gray-200 md:w-64 md:p-4">
+      <button id="sidebar-menu-toggle" type="button" class="m-4 mb-0 flex w-[calc(100%-2rem)] items-center justify-between rounded-lg border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 md:hidden" aria-controls="sidebar-menu" aria-expanded="false">
+        <span>Menu</span>
+        <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="sidebar-menu" class="absolute left-0 top-full z-20 grid hidden w-full grid-cols-1 gap-2 border-y border-gray-200 bg-white p-4 shadow-lg md:static md:grid md:w-auto md:grid-cols-1 md:border-0 md:p-0 md:shadow-none">
+        <a href="#" class="block p-2 rounded-lg bg-blue-50 text-blue-700 font-medium">Painel</a>
+        <a href="#" class="block p-2 rounded-lg text-gray-600 hover:bg-gray-100">Usuários</a>
+        <a href="#" class="block p-2 rounded-lg text-gray-600 hover:bg-gray-100">Relatórios</a>
+        <a href="#" class="block p-2 rounded-lg text-gray-600 hover:bg-gray-100">Configurações</a>
+      </nav>
+    </aside>
+
+    <!-- Coluna 2: Área de Conteúdo Principal -->
+    <main class="flex-1 p-6 space-y-6">
+      
+      <!-- Linha 1 de Conteúdo -->
+      <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Bem-vindo ao Painel</h2>
+        <p class="text-gray-600">Esta é a primeira linha de conteúdo da sua área principal. Você pode usar este espaço para resumos, banners ou introduções.</p>
+      </section>
+
+      <!-- Linha 2 com 3 Cards -->
+      <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div class="text-blue-500 text-2xl mb-2">📊</div>
+          <h3 class="text-lg font-semibold text-gray-800">Vendas</h3>
+          <p class="text-gray-600 text-sm mt-1">Acompanhe o crescimento mensal.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div class="text-green-500 text-2xl mb-2">👥</div>
+          <h3 class="text-lg font-semibold text-gray-800">Clientes</h3>
+          <p class="text-gray-600 text-sm mt-1">Gerencie sua base de usuários ativos.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div class="text-purple-500 text-2xl mb-2">⚙️</div>
+          <h3 class="text-lg font-semibold text-gray-800">Tarefas</h3>
+          <p class="text-gray-600 text-sm mt-1">Monitore os processos em execução.</p>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+</div>
+
+<script>
+  const menuToggle = document.getElementById("sidebar-menu-toggle");
+  const sidebarMenu = document.getElementById("sidebar-menu");
+
+  menuToggle.addEventListener("click", () => {
+    const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+    sidebarMenu.classList.toggle("hidden", isExpanded);
+  });
+
+  sidebarMenu.addEventListener("click", (event) => {
+    if (event.target.closest("a") && window.matchMedia("(width < 48rem)").matches) {
+      menuToggle.setAttribute("aria-expanded", "false");
+      sidebarMenu.classList.add("hidden");
+    }
+  });
+</script>
+
+</body>
+</html>
